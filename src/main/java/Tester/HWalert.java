@@ -4,12 +4,16 @@ package Tester;
         import org.openqa.selenium.By;
         import org.openqa.selenium.WebDriver;
         import org.openqa.selenium.chrome.ChromeDriver;
+        import org.openqa.selenium.support.events.EventFiringWebDriver;
 
         import java.util.concurrent.TimeUnit;
 
 public class HWalert {
 
     WebDriver driver;
+    EventFiringWebDriver eventFiringWebDriver;
+    Event Event;
+
 
     public void setup()
 
@@ -20,6 +24,11 @@ public class HWalert {
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.get("http://demo.guru99.com/test/delete_customer.php");
+
+        EventFiringWebDriver eventFiringWebDriver = new EventFiringWebDriver(driver);
+        Event = new Event();
+        eventFiringWebDriver.register(Event);
+        driver =eventFiringWebDriver;
 
 
     }
